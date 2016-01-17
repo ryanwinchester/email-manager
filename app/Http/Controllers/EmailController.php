@@ -65,6 +65,6 @@ class EmailController extends Controller
         // $hubspotStatus->subscribed : boolean
         $hubspot = $this->hubspot->email()->subscriptionStatus(env('HUBSPOT_PORTAL_ID'), $email);
 
-        return view('status', compact('mailchimp', 'hubspot'));
+        return view('status', compact('mailchimp', 'hubspot', 'email'));
     }
 }

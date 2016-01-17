@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Subscription status for <strong>{{ $email }}</strong></div>
 
                 <div class="panel-body">
                     <h2>Mailchimp</h2>
@@ -27,13 +27,13 @@
 
                     <h2>Hubspot</h2>
 
-                    <div>Subscribed: {{ $hubspot->subscribed ? 'Yes' : 'No' }}</div>
+                    <div>Global Subscription: {{ $hubspot->subscribed ? 'Yes' : 'No' }}</div>
 
                     @if (count($hubspot->subscriptionStatuses))
                         <h4>Individual subscription statuses:</h4>
                         <ul>
                             @foreach ($hubspot->subscriptionStatuses as $status)
-                                <li>{{ dump($hubspot) }}</li>
+                                <li>{{ dump($hubspot->getData()) }}</li>
                             @endforeach
                         </ul>
                     @endif
