@@ -1,26 +1,29 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "ryanwinchester/email-manager",
+    "description": "Email subscription manager",
+    "keywords": ["email", "subscriptions", "mailchimp", "hubspot"],
     "license": "MIT",
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*"
+        "laravel/framework": "5.2.*",
+        "drewm/mailchimp-api": "dev-master",
+        "fungku/hubspot-php": "dev-master@dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
         "symfony/css-selector": "2.8.*|3.0.*",
-        "symfony/dom-crawler": "2.8.*|3.0.*"
+        "symfony/dom-crawler": "2.8.*|3.0.*",
+        "laravel/homestead": "^3.0"
     },
     "autoload": {
         "classmap": [
             "database"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "EmailManager\\": "app/"
         }
     },
     "autoload-dev": {

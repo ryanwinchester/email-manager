@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Providers;
+namespace EmailManager\Providers;
 
+use Drewm\MailChimp;
+use Fungku\HubSpot\HubSpotService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(MailChimp::class, function () {
+            return new MailChimp(env('MAILCHIMP_API_KEY'));
+        });
+
+        $this->app->bind(HubSpotService::class, function () {
+            return HubSpotService::make(env('HUBSPOT_API_KEY'));
+        });
     }
 }
