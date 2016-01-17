@@ -28,7 +28,7 @@
                     <h2>Hubspot</h2>
 
                     <div>Subscribed: {{ $hubspot->subscribed ? 'Yes' : 'No' }}</div>
-                    
+
                     @if (count($hubspot->subscriptionStatuses))
                         <h4>Individual subscription statuses:</h4>
                         <ul>
