@@ -10,6 +10,7 @@
                 <div class="panel-body">
                     <h2>Mailchimp</h2>
 
+                    @if (count($mailchimp))
                     <ul>
                         @foreach($mailchimp as $subscription)
                             <li>
@@ -24,11 +25,15 @@
                             </li>
                         @endforeach
                     </ul>
+                    @else
+                        <h4>No mailchimp subscriptions...</h4>
+                    @endif
 
                     <h2>Hubspot</h2>
-
-                    <div>Global Subscription: {{ $hubspot->subscribed ? 'Yes' : 'No' }}</div>
-
+                    {{-- Hubspot is whack --}}
+                    {{-- <div>Global Subscription: {{ $hubspot->subscribed ? 'Yes' : 'No' }}</div> --}}
+                    {{ dump($hubspot->getData()) }}
+                    {{--
                     @if (count($hubspot->subscriptionStatuses))
                         <h4>Individual subscription statuses:</h4>
                         <ul>
@@ -37,6 +42,7 @@
                             @endforeach
                         </ul>
                     @endif
+                    --}}
                 </div>
             </div>
         </div>
