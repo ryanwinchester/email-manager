@@ -5,6 +5,9 @@
         .loading {
             text-align: center;
         }
+        img {
+            max-width: 100%;
+        }
     </style>
 @endsection
 
