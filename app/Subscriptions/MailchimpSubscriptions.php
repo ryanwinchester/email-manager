@@ -64,6 +64,19 @@ class MailchimpSubscriptions implements SubscriptionManager
 
     public function unsubscribe($email, $lists = [])
     {
-        // TODO: Implement unsubscribe() method.
+        if (empty($lists)) {
+            $lists = $this->lists();
+        } else {
+            $lists = collect((array) $lists);
+        }
+
+        $lists->each(function ($list) use ($email) {
+            $unsubscribe = $this->mailchimp->call('lists/unsubscribe', [
+                'id' => $list['id'],
+                'email' => ['email' => $email],
+            ]);
+
+            dd($unsubscribe);
+        });
     }
 }

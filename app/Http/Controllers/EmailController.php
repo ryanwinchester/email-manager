@@ -6,24 +6,22 @@ use EmailManager\Subscriptions\ManagerFactory;
 
 class EmailController extends Controller
 {
-    private $managerFactory;
+    private $managers;
 
     public function __construct(ManagerFactory $managerFactory)
     {
-        $this->managerFactory = $managerFactory;
+        $services = array_keys(config('email-manager.services'));
+        $this->managers = $managerFactory->create($services);
     }
 
     public function status($email)
     {
-        $services = array_keys(config('email-manager.services'));
-        $managers = $this->managerFactory->create($services);
-
-        $services = array_map(function ($manager) use ($email) {
+        $services = $this->managers->map(function ($manager) use ($email) {
             return [
                 'name' => $this->serviceNameFromClassName(get_class($manager)),
                 'statuses' => $manager->status($email),
             ];
-        }, $managers);
+        });
 
         return view('status', compact('services', 'email'));
     }
@@ -31,5 +29,14 @@ class EmailController extends Controller
     private function serviceNameFromClassName($class)
     {
         return ucfirst(str_replace('Subscriptions', '', class_basename($class)));
+    }
+
+    public function unsubscribe($email)
+    {
+        $this->managers->each(function ($manager) use ($email) {
+            $manager->unsubscribe($email);
+        });
+
+        return back();
     }
 }

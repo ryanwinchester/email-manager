@@ -15,9 +15,11 @@ class ManagerFactory
 
     public static function createMany($services)
     {
-        return array_map(function ($service) {
-            return static::createOne($service);
-        }, $services);
+        return collect(
+            array_map(function ($service) {
+                return static::createOne($service);
+            }, $services)
+        );
     }
 
     public static function createOne($service)

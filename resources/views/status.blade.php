@@ -8,8 +8,9 @@
                 <div class="panel-heading">Subscription status for <strong>{{ $email }}</strong></div>
 
                 <div class="panel-body">
-                    <form action="/status/unsubcribe" method="POST">
-                        <input type="hidden" name="email" value="{{ $email }}">
+                    <form action="/status/{{ $email }}/unsubscribe" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('PATCH') }}
                         <button type="submit" class="btn btn-danger btn-lg">UNSUBSCRIBE ALL</button>
                     </form>
                     @foreach ($services as $service)
