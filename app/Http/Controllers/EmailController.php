@@ -23,11 +23,16 @@ class EmailController extends Controller
 
         $services = array_map(function ($manager) use ($email) {
             return [
-                'name' => ucfirst(str_replace('Subscriptions', '', class_basename(get_class($manager)))),
+                'name' => $this->serviceNameFromClassName(get_class($manager)),
                 'statuses' => $manager->status($email),
             ];
         }, $managers);
 
         return view('status', compact('services', 'email'));
+    }
+
+    private function serviceNameFromClassName($class)
+    {
+        return ucfirst(str_replace('Subscriptions', '', class_basename($class)));
     }
 }
