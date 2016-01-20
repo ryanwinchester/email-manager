@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('styles')
+    <style>
+        .loading {
+            text-align: center;
+        }
+    </style>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -7,8 +15,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Manage</div>
 
-                <div class="panel-body">
-                    <form action="{{ route('email') }}" method="POST">
+                <div class="email-panel panel-body">
+                    <form id="email-form" action="{{ route('email') }}" method="POST">
                         <div class="form-group">
                             <label for="email">Email Address</label>
                             {{ csrf_field() }}
@@ -23,4 +31,16 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function(){
+
+            $('#email-form').submit(function(e) {
+                e.target.submit();
+                $('.email-panel').addClass('loading').html('<img src="/img/loading.gif">');
+            });
+        });
+    </script>
 @endsection
