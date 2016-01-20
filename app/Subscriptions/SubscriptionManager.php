@@ -34,4 +34,12 @@ interface SubscriptionManager
      * @param array $lists
      */
     public function unsubscribe($email, $lists = []);
+
+    /**
+     * Change a subscriber's email address.
+     *
+     * @param string $email
+     * @param string $new_email
+     */
+    public function changeEmail($email, $new_email);
 }

@@ -15,14 +15,14 @@ class EmailController extends Controller
         $this->managers = $managerFactory->create($services);
     }
 
-    public function status(Request $request)
+    public function email(Request $request)
     {
         $email = $request->get('email');
 
         return redirect()->route('email.status', ['email' => $email]);
     }
 
-    public function email($email)
+    public function status($email)
     {
         $services = $this->managers->map(function ($manager) use ($email) {
             return [
@@ -37,6 +37,17 @@ class EmailController extends Controller
     private function serviceNameFromClassName($class)
     {
         return ucfirst(str_replace('Subscriptions', '', class_basename($class)));
+    }
+
+    public function change(Request $request, $email)
+    {
+        $new_email = $request->get('new_email');
+
+        $this->managers->each(function ($manager) use ($email, $new_email) {
+            $manager->changeEmail($email, $new_email);
+        });
+
+        return redirect()->route('email.status', ['email' => $new_email]);
     }
 
     public function unsubscribe($email)

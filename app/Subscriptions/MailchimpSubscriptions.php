@@ -15,11 +15,22 @@ class MailchimpSubscriptions implements SubscriptionManager
         $this->config = $config ?: config('email-manager.services.mailchimp');
     }
 
+    /**
+     * Get all of the mailing lists.
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function lists()
     {
         return collect($this->mailchimp->call('lists/list')['data']);
     }
 
+    /**
+     * Get the subscription status of an email address for all the lists.
+     *
+     * @param string $email
+     * @return \Illuminate\Support\Collection
+     */
     public function status($email)
     {
         return $this->lists()->map(function($list) use ($email) {
@@ -58,11 +69,23 @@ class MailchimpSubscriptions implements SubscriptionManager
         });
     }
 
+    /**
+     * Subscribe an email address to any number of lists.
+     *
+     * @param string $email
+     * @param array $lists
+     */
     public function subscribe($email, $lists = [])
     {
         // TODO: Implement subscribe() method.
     }
 
+    /**
+     * Unsubscribe an email address from any number of lists.
+     *
+     * @param string $email
+     * @param array $lists
+     */
     public function unsubscribe($email, $lists = [])
     {
         if (empty($lists)) {
@@ -75,6 +98,25 @@ class MailchimpSubscriptions implements SubscriptionManager
             $unsubscribe = $this->mailchimp->call('lists/unsubscribe', [
                 'id' => $list['id'],
                 'email' => ['email' => $email],
+            ]);
+        });
+    }
+
+    /**
+     * Change a subscriber's email address.
+     *
+     * @param string $email
+     * @param string $new_email
+     */
+    public function changeEmail($email, $new_email)
+    {
+        $this->lists()->each(function ($list) use ($email, $new_email) {
+            $this->mailchimp->call('lists/update-member', [
+                'id' => $list['id'],
+                'email' => ['email' => $email],
+                'merge_vars' => [
+                    'new-email' => $new_email,
+                ],
             ]);
         });
     }

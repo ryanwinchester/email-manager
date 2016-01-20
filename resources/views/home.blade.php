@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Manage</div>
 
                 <div class="panel-body">
-                    <form action="/status" method="POST">
+                    <form action="{{ route('email') }}" method="POST">
                         <div class="form-group">
                             <label for="email">Email Address</label>
                             {{ csrf_field() }}

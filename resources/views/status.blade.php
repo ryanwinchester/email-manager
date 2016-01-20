@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-8">
-                            <form action="/email/{{ $email }}/change" method="POST">
+                            <form action="{{ route('email.change', [$email]) }}" method="POST">
                                 {{ csrf_field() }}
                                 {{ method_field('PATCH') }}
                                 <div class="form-group">
@@ -23,7 +23,7 @@
                             </form>
                         </div>
                         <div class="col-sm-4" style="text-align:center;">
-                            <form action="/status/{{ $email }}/unsubscribe" method="POST">
+                            <form action="{{ route('email.unsubscribe', [$email]) }}" method="POST">
                                 {{ csrf_field() }}
                                 {{ method_field('PATCH') }}
                                 <div class="form-group">
