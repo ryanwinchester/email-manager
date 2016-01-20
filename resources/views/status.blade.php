@@ -8,41 +8,39 @@
                 <div class="panel-heading">Subscription status for <strong>{{ $email }}</strong></div>
 
                 <div class="panel-body">
-                    <h2>Mailchimp</h2>
-
-                    @if (count($mailchimp))
-                    <ul>
-                        @foreach($mailchimp as $subscription)
-                            <li>
-                                {{ $subscription['name'] }}
-                                @if (count($subscription['groupings']))
-                                    <ul>
-                                        @foreach ($subscription['groupings'] as $grouping)
-                                            <li>{{ $grouping }}</li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-                            </li>
-                        @endforeach
-                    </ul>
-                    @else
-                        <h4>No mailchimp subscriptions...</h4>
-                    @endif
-
-                    <h2>Hubspot</h2>
-                    {{-- Hubspot is whack --}}
-                    {{-- <div>Global Subscription: {{ $hubspot->subscribed ? 'Yes' : 'No' }}</div> --}}
-                    {{ dump($hubspot->getData()) }}
-                    {{--
-                    @if (count($hubspot->subscriptionStatuses))
-                        <h4>Individual subscription statuses:</h4>
+                    <form action="/status/unsubcribe" method="POST">
+                        <input type="hidden" name="email" value="{{ $email }}">
+                        <button type="submit" class="btn btn-danger btn-lg">UNSUBSCRIBE ALL</button>
+                    </form>
+                    @foreach ($services as $service)
+                        <h2>{{ $service['name'] }}</h2>
                         <ul>
-                            @foreach ($hubspot->subscriptionStatuses as $status)
-                                <li>{{ dump($hubspot->getData()) }}</li>
+                            @foreach ($service['statuses'] as $status)
+                                <li>
+                                    @if ($status['subscribed'])
+                                        <label class="label label-success">Yes</label>
+                                    @else
+                                        <label class="label label-danger">No</label>
+                                    @endif
+                                    {{ $status['name'] }}
+                                    @if (isset($status['groupings']))
+                                        <ul>
+                                            @foreach ($status['groupings'] as $grouping)
+                                                <li>
+                                                    @if ($status['subscribed'])
+                                                        <label class="label label-success">Yes</label>
+                                                    @else
+                                                        <label class="label label-danger">No</label>
+                                                    @endif
+                                                    {{ $grouping['name'] }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </li>
                             @endforeach
                         </ul>
-                    @endif
-                    --}}
+                    @endforeach
                 </div>
             </div>
         </div>
