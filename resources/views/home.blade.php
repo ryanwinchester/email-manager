@@ -39,7 +39,11 @@
 
             $('#email-form').submit(function(e) {
                 e.target.submit();
-                $('.email-panel').addClass('loading').html('<img src="/img/loading.gif">');
+                var max = 11;
+                var num = Math.floor((Math.random() * max) + 1); // random number between 1 and max
+                $('.email-panel').addClass('loading').html(
+                    '<img src="/img/loaders/loader'+num+'.gif">'
+                );
             });
         });
     </script>
