@@ -76,8 +76,6 @@ class MailchimpSubscriptions implements SubscriptionManager
                 'id' => $list['id'],
                 'email' => ['email' => $email],
             ]);
-
-            dd($unsubscribe);
         });
     }
 }
