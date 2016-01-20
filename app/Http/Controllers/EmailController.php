@@ -47,7 +47,8 @@ class EmailController extends Controller
             $manager->changeEmail($email, $new_email);
         });
 
-        return redirect()->route('email.status', ['email' => $new_email]);
+        return redirect()->route('email.status', ['email' => $new_email])
+            ->with('warning', '<strong>Email change submitted.</strong> It might take a few minutes to show correctly.');
     }
 
     public function unsubscribe($email)
@@ -56,6 +57,7 @@ class EmailController extends Controller
             $manager->unsubscribe($email);
         });
 
-        return back();
+        return back()
+            ->with('warning', '<strong>Email unsubscribed</strong> from all. It might take a few minutes to show correctly.');
     }
 }

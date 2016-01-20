@@ -5,6 +5,11 @@
 
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+            @if (Session::has('warning'))
+                <div class="alert alert-warning">
+                    <p>{!! Session::get('warning') !!}</p>
+                </div>
+            @endif
             <div class="panel panel-default">
                 <div class="panel-heading">Edit <strong>{{ $email }}</strong></div>
                 <div class="panel-body">
