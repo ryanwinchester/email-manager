@@ -31,17 +31,18 @@ class MailchimpSubscriptions implements SubscriptionManager
             ]);
 
             if ($status['success_count'] > 0) {
+                $subscribed = $status['data'][0]['status'] == 'subscribed';
                 $subscription = [
                     'id' => $status['data'][0]['list_id'],
                     'name' => $status['data'][0]['list_name'],
-                    'subscribed' => true,
+                    'subscribed' => $subscribed,
                 ];
 
                 if (isset($status['data'][0]['merges']['GROUPINGS'])) {
-                    $subscription['groupings'] = array_map(function ($grouping) {
+                    $subscription['groupings'] = array_map(function ($grouping) use ($subscribed) {
                         return [
                             'name' => $grouping['name'],
-                            'subscribed' => $grouping['interested'],
+                            'subscribed' => $subscribed ? $grouping['interested'] : false,
                         ];
                     }, $status['data'][0]['merges']['GROUPINGS'][0]['groups']);
                 }

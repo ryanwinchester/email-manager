@@ -24,18 +24,19 @@ class HubspotSubscriptions implements SubscriptionManager
 
     public function status($email)
     {
-        $statuses = collect(
-            $this->hubspot->email()
-                 ->subscriptionStatus($this->config['portal_id'], $email)
-                 ->subscriptionStatuses
-        );
+        $status = $this->hubspot->email()
+            ->subscriptionStatus($this->config['portal_id'], $email)
+            ->getData();
 
-        return $this->lists()->map(function ($list) use ($statuses) {
+        $subscribed = $status->subscribed;
+        $statuses = collect($status->subscriptionStatuses);
+
+        return $this->lists()->map(function ($list) use ($subscribed, $statuses) {
             $status = $statuses->where('id', $list->id)->first();
             return [
                 'id' => $list->id,
                 'name' => $list->name,
-                'subscribed' => $status ? $status->subscribed : false,
+                'subscribed' => $status && $subscribed ? $status->subscribed : false,
             ];
         });
     }
@@ -47,6 +48,9 @@ class HubspotSubscriptions implements SubscriptionManager
 
     public function unsubscribe($email, $lists = [])
     {
-        // TODO: Implement unsubscribe() method.
+        $this->hubspot->email()
+            ->updateSubscription($this->config['portal_id'], $email, [
+                'unsubscribeFromAll' => true,
+            ]);
     }
 }
