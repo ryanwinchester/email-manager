@@ -6,11 +6,7 @@ use Fungku\HubSpot\HubSpotService;
 
 class HubspotSubscriptions implements SubscriptionManager
 {
-    /**
-     * @var \Fungku\HubSpot\HubSpotService
-     */
     private $hubspot;
-
     private $config;
 
     public function __construct(HubSpotService $hubspot, $config = [])

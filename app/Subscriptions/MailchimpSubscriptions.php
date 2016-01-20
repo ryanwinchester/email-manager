@@ -6,11 +6,7 @@ use Drewm\MailChimp;
 
 class MailchimpSubscriptions implements SubscriptionManager
 {
-    /**
-     * @var \Drewm\MailChimp
-     */
     private $mailchimp;
-
     private $config;
 
     public function __construct(MailChimp $mailchimp, $config = [])

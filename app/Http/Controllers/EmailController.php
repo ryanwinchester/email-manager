@@ -6,9 +6,6 @@ use EmailManager\Subscriptions\ManagerFactory;
 
 class EmailController extends Controller
 {
-    /**
-     * @var \EmailManager\Subscriptions\ManagerFactory
-     */
     private $managerFactory;
 
     public function __construct(ManagerFactory $managerFactory)
