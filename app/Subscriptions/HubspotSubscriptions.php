@@ -28,14 +28,13 @@ class HubspotSubscriptions implements SubscriptionManager
 
     public function status($email)
     {
-        $lists = $this->lists();
-        $status = $this->hubspot->email()
-            ->subscriptionStatus($this->config['portal_id'], $email)
-            ->getData();
+        $statuses = collect(
+            $this->hubspot->email()
+                 ->subscriptionStatus($this->config['portal_id'], $email)
+                 ->subscriptionStatuses
+        );
 
-        $statuses = collect($status->subscriptionStatuses);
-
-        return $lists->map(function ($list) use ($statuses) {
+        return $this->lists()->map(function ($list) use ($statuses) {
             $status = $statuses->where('id', $list->id)->first();
             return [
                 'id' => $list->id,
