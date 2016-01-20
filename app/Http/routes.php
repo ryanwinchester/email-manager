@@ -5,6 +5,16 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/', 'HomeController@index');
 
-    Route::get('status/{email}', 'EmailController@status');
-    Route::patch('status/{email}/unsubscribe', 'EmailController@unsubscribe');
+    Route::post('status', [
+        'uses' => 'EmailController@status',
+        'as' => 'email.check',
+    ]);
+    Route::get('status/{email}', [
+        'uses' => 'EmailController@email',
+        'as' => 'email.status',
+    ]);
+    Route::patch('status/{email}/unsubscribe', [
+        'uses' => 'EmailController@unsubscribe',
+        'as' => 'email.unsubscribe',
+    ]);
 });

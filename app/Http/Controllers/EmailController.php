@@ -3,6 +3,7 @@
 namespace EmailManager\Http\Controllers;
 
 use EmailManager\Subscriptions\ManagerFactory;
+use Illuminate\Http\Request;
 
 class EmailController extends Controller
 {
@@ -14,7 +15,14 @@ class EmailController extends Controller
         $this->managers = $managerFactory->create($services);
     }
 
-    public function status($email)
+    public function status(Request $request)
+    {
+        $email = $request->get('email');
+
+        return redirect()->route('email.status', ['email' => $email]);
+    }
+
+    public function email($email)
     {
         $services = $this->managers->map(function ($manager) use ($email) {
             return [

@@ -8,7 +8,16 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    <form action="/status" method="POST">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            {{ csrf_field() }}
+                            <input type="email" name="email" id="email" placeholder="Email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default">Check</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

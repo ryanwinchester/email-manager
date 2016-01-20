@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "drewm/mailchimp-api": "dev-master",
-        "fungku/hubspot-php": "dev-master@dev"
+        "fungku/hubspot-php": "dev-master@dev",
+        "filp/whoops": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

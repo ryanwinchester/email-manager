@@ -2,17 +2,50 @@
 
 @section('content')
 <div class="container">
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Edit <strong>{{ $email }}</strong></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <form action="/email/{{ $email }}/change" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('PATCH') }}
+                                <div class="form-group">
+                                    <label for="email" class="control-label">Change email to</label>
+                                    <input type="email" name="new_email" id="new_email" placeholder="New email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-warning">Change</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-4" style="text-align:center;">
+                            <form action="/status/{{ $email }}/unsubscribe" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('PATCH') }}
+                                <div class="form-group">
+                                    <label>Unsubscribe this user from all lists</label>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-danger btn-lg">UNSUBSCRIBE ALL</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Subscription status for <strong>{{ $email }}</strong></div>
 
                 <div class="panel-body">
-                    <form action="/status/{{ $email }}/unsubscribe" method="POST">
-                        {{ csrf_field() }}
-                        {{ method_field('PATCH') }}
-                        <button type="submit" class="btn btn-danger btn-lg">UNSUBSCRIBE ALL</button>
-                    </form>
                     @foreach ($services as $service)
                         <h2>{{ $service['name'] }}</h2>
                         <ul>
@@ -46,5 +79,6 @@
             </div>
         </div>
     </div>
+
 </div>
 @endsection
