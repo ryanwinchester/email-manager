@@ -56,7 +56,7 @@
 
                 <div class="panel-body">
                     @foreach ($services as $service)
-                        <h2>{{ $service['name'] }}</h2>
+                        <h2>{{ $service['name'] }} Lists</h2>
                         <ul>
                             @foreach ($service['statuses'] as $status)
                                 <li>

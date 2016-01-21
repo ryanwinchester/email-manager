@@ -16,6 +16,12 @@ $factory->define(EmailManager\User::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'email' => $faker->email,
         'password' => bcrypt(str_random(10)),
+        'is_admin' => false,
         'remember_token' => str_random(10),
     ];
+});
+
+$factory->defineAs(EmailManager\User::class, 'admin', function ($faker) use ($factory) {
+    $user = $factory->raw(EmailManager\User::class);
+    return array_merge($user, ['is_admin' => true]);
 });
