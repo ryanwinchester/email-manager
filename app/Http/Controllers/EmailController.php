@@ -51,6 +51,19 @@ class EmailController extends Controller
             ->with('warning', '<strong>Email change submitted.</strong> It might take a few minutes to show correctly.');
     }
 
+    public function changeName(Request $request, $email)
+    {
+        $first_name = $request->get('first_name');
+        $last_name = $request->get('last_name');
+
+        $this->managers->each(function ($manager) use ($email, $first_name, $last_name) {
+            $manager->changeName($email, $first_name, $last_name);
+        });
+
+        return back()
+            ->with('warning', '<strong>Name change submitted.</strong> It might take a few minutes to show correctly.');
+    }
+
     public function unsubscribe($email)
     {
         $this->managers->each(function ($manager) use ($email) {

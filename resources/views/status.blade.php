@@ -9,6 +9,9 @@
         .subscription-statuses label {
             margin-right: 8px;
         }
+        a.panel-heading {
+            display: block;
+        }
     </style>
 @endsection
 
@@ -26,14 +29,33 @@
                     <p>{!! Session::get('warning') !!}</p>
                 </div>
             @endif
-            <div class="panel panel-default">
-                <div class="panel-heading">Edit <strong>{{ $email }}</strong></div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <a class="panel-heading" data-toggle="collapse" href="#collapse-email-change">
+                            Change email <span class="caret"></span>
+                        </a>
+                        <div class="panel-body collapse" id="collapse-email-change">
                             @include('partials.email-change')
                         </div>
-                        <div class="col-sm-4" style="text-align:center;">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <a class="panel-heading" data-toggle="collapse" href="#collapse-name-change">
+                            Change name <span class="caret"></span>
+                        </a>
+                        <div class="panel-body collapse" id="collapse-name-change">
+                            @include('partials.name-change')
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <a class="panel-heading" data-toggle="collapse" href="#collapse-unsubscribe">
+                            Unsubscribe <span class="caret"></span>
+                        </a>
+                        <div class="panel-body collapse" id="collapse-unsubscribe">
                             @include('partials.email-unsubscribe')
                         </div>
                     </div>
@@ -85,6 +107,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
+
+            // $('#collapse-email-change, #collapse-name-change, #collapse-unsubscribe').hide();
 
             $('#change-email-form').submit(function (e) {
                 e.preventDefault();

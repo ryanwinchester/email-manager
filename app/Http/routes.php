@@ -26,5 +26,9 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'EmailController@unsubscribe',
             'as'   => 'email.unsubscribe',
         ]);
+        Route::patch('name/{email}/change', [
+            'uses' => 'EmailController@changeName',
+            'as'   => 'name.change',
+        ]);
     });
 });
