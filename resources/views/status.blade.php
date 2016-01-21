@@ -15,6 +15,10 @@
         .panel-body h2:first-of-type {
             margin-top: 0;
         }
+        .legend {
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
     </style>
 @endsection
 
@@ -79,6 +83,14 @@
                     @endforeach
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="legend col-md-10 col-md-offset-1">
+            <label class="label label-default">&nbsp;</label> Not on list &nbsp;
+            <label class="label label-success">&nbsp;</label> Subscribed &nbsp;
+            <label class="label label-danger">&nbsp;</label> Unsubscribed &nbsp;
         </div>
     </div>
 
