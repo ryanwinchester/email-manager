@@ -42,4 +42,13 @@ interface SubscriptionManager
      * @param string $new_email
      */
     public function changeEmail($email, $new_email);
+
+    /**
+     * Change a subscriber's name.
+     *
+     * @param string $email
+     * @param string $first_name
+     * @param string $last_name
+     */
+    public function changeName($email, $first_name, $last_name);
 }

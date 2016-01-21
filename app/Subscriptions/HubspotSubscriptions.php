@@ -55,6 +55,7 @@ class HubspotSubscriptions implements SubscriptionManager
                 'id' => $list->id,
                 'name' => $list->name,
                 'subscribed' => $subscribed,
+                'names' => ['first_name' => null, 'last_name' => null],
             ];
         });
     }
@@ -99,6 +100,31 @@ class HubspotSubscriptions implements SubscriptionManager
                 [
                     'property' => 'email',
                     'value' => $new_email,
+                ],
+            ]);
+        }
+    }
+
+    /**
+     * Change a subscriber's name.
+     *
+     * @param string $email
+     * @param string $first_name
+     * @param string $last_name
+     */
+    public function changeName($email, $first_name, $last_name)
+    {
+        $contact = $this->hubspot->contacts()->getByEmail($email);
+
+        if ($contact->getStatusCode() != 404) {
+            $this->hubspot->contacts()->update($contact->vid, [
+                [
+                    'property' => 'firstname',
+                    'value' => $first_name,
+                ],
+                [
+                    'property' => 'lastname',
+                    'value' => $last_name,
                 ],
             ]);
         }

@@ -86,7 +86,10 @@
     <script>
         $(document).ready(function () {
 
-            // $('#collapse-email-change, #collapse-name-change, #collapse-unsubscribe').hide();
+            $('[data-toggle="tooltip"]').tooltip();
+
+            function disableButton(btn) { btn.button('loading'); }
+            function enableButton(btn) { btn.button('reset'); }
 
             $('#change-email-form').submit(function (e) {
                 e.preventDefault();
@@ -102,6 +105,34 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "Yes, change it!",
                     cancelButtonText: "Nevermind.",
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                }, function(confirmed) {
+                    if (confirmed) {
+                        e.target.submit();
+                        setTimeout(function(){
+                            // wait 20 seconds
+                        }, 20000);
+                    } else {
+                        enableButton($button);
+                    }
+                });
+            });
+
+            $('#change-name-form').submit(function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $button = $this.find('button[type=submit]');
+                disableButton($button);
+                swal({
+                    title: "Wooooah there!",
+                    text: "This could have unintended side-effects, like for couples who share an email and are subscribed to multiple lists. Only do this if you are certain.",
+                    type: "warning",
+                    html: true,
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "I am certain!",
+                    cancelButtonText: "Actually... no.",
                     closeOnConfirm: false,
                     showLoaderOnConfirm: true
                 }, function(confirmed) {
@@ -143,14 +174,6 @@
                     }
                 });
             });
-
-            function disableButton(btn) {
-                btn.button('loading');
-            }
-
-            function enableButton(btn) {
-                btn.button('reset');
-            }
 
         });
     </script>

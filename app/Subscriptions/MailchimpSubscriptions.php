@@ -34,6 +34,7 @@ class MailchimpSubscriptions implements SubscriptionManager
     public function status($email)
     {
         return $this->lists()->map(function($list) use ($email) {
+            $names = ['first_name' => null, 'last_name' => null];
             $status = $this->mailchimp->call('lists/member-info', [
                 'id' => $list['id'],
                 'emails' => [
@@ -58,6 +59,14 @@ class MailchimpSubscriptions implements SubscriptionManager
                     }, $status['data'][0]['merges']['GROUPINGS'][0]['groups']);
                 }
 
+                if (isset($status['data'][0]['merges'])) {
+                    $merges = $status['data'][0]['merges'];
+                    $subscription['names'] = [
+                        'first_name' => isset($merges['FNAME']) ? $merges['FNAME'] : null,
+                        'last_name' => isset($merges['LNAME']) ? $merges['LNAME'] : null,
+                    ];
+                }
+
                 return $subscription;
             }
 
@@ -65,6 +74,7 @@ class MailchimpSubscriptions implements SubscriptionManager
                 'id' => $list['id'],
                 'name' => $list['name'],
                 'subscribed' => 0,
+                'names' => $names,
             ];
         });
     }
@@ -116,6 +126,27 @@ class MailchimpSubscriptions implements SubscriptionManager
                 'email' => ['email' => $email],
                 'merge_vars' => [
                     'new-email' => $new_email,
+                ],
+            ]);
+        });
+    }
+
+    /**
+     * Change a subscriber's name.
+     *
+     * @param string $email
+     * @param string $first_name
+     * @param string $last_name
+     */
+    public function changeName($email, $first_name, $last_name)
+    {
+        $this->lists()->each(function ($list) use ($email, $first_name, $last_name) {
+            $this->mailchimp->call('lists/update-member', [
+                'id' => $list['id'],
+                'email' => ['email' => $email],
+                'merge_vars' => [
+                    'FNAME' => $first_name,
+                    'LNAME' => $last_name,
                 ],
             ]);
         });

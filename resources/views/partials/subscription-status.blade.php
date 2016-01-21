@@ -10,7 +10,13 @@
             @else
                 <label class="label label-default">&nbsp;</label>
             @endif
-            {{ $status['name'] }}
+            @if ($status['names']['first_name'])
+                <span data-toggle="tooltip" data-placement="top" title="Subscribed as: {{ $status['names']['first_name'] }} {{ $status['names']['last_name'] }}">
+                    {{ $status['name'] }}
+                </span>
+            @else
+                {{ $status['name'] }}
+            @endif
             @if (isset($status['groupings']))
                 <ul class="list-unstyled" style="padding-left:26px;">
                     @foreach ($status['groupings'] as $grouping)
