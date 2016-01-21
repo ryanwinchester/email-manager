@@ -32,7 +32,7 @@
             @endif
             <div class="row">
                 <div class="col-md-4">
-                    <div class="panel panel-warning">
+                    <div class="panel panel-success">
                         <a class="panel-heading" data-toggle="collapse" href="#collapse-email-change">
                             Change email <span class="caret"></span>
                         </a>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="panel panel-warning">
+                    <div class="panel panel-success">
                         <a class="panel-heading" data-toggle="collapse" href="#collapse-name-change">
                             Change name <span class="caret"></span>
                         </a>
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="panel panel-warning">
+                    <div class="panel panel-success">
                         <a class="panel-heading" data-toggle="collapse" href="#collapse-unsubscribe">
                             Unsubscribe <span class="caret"></span>
                         </a>

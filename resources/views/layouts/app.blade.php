@@ -18,6 +18,9 @@
         body {
             font-family: 'Lato';
         }
+        .navbar-inverse {
+            background-color: #006782;
+        }
         .fa-btn {
             margin-right: 6px;
         }
