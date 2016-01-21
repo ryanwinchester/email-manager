@@ -2,6 +2,14 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <style>
+        .subscription-statuses li {
+            padding-bottom: 3px;
+        }
+        .subscription-statuses label {
+            margin-right: 8px;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -57,14 +65,12 @@
                 <div class="panel-body">
                     @foreach ($services as $service)
                         <h2>{{ $service['name'] }} Lists</h2>
-                        <ul>
+                        <ul class="subscription-statuses list-unstyled">
                             @foreach ($service['statuses'] as $status)
                                 <li>
-                                    @if ($status['subscribed'])
-                                        <label class="label label-success">Yes</label>
-                                    @else
-                                        <label class="label label-danger">No</label>
-                                    @endif
+                                    <label class="label label-{{$status['subscribed'] ? 'success' : 'danger' }}">
+                                        &nbsp;
+                                    </label>
                                     {{ $status['name'] }}
                                     @if (isset($status['groupings']))
                                         <ul>
