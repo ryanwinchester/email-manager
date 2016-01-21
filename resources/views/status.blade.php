@@ -12,6 +12,10 @@
     </style>
 @endsection
 
+@section('search-bar')
+
+@endsection
+
 @section('content')
 <div class="container">
 
@@ -27,29 +31,10 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-8">
-                            <form id="change-email-form" action="{{ route('email.change', [$email]) }}" method="POST">
-                                {{ csrf_field() }}
-                                {{ method_field('PATCH') }}
-                                <div class="form-group">
-                                    <label for="email" class="control-label">Change email to</label>
-                                    <input type="email" name="new_email" id="new_email" placeholder="New email" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-warning" data-loading-text="Loading..." autocomplete="off">Change</button>
-                                </div>
-                            </form>
+                            @include('partials.email-change')
                         </div>
                         <div class="col-sm-4" style="text-align:center;">
-                            <form id="unsubscribe-form" action="{{ route('email.unsubscribe', [$email]) }}" method="POST">
-                                {{ csrf_field() }}
-                                {{ method_field('PATCH') }}
-                                <div class="form-group">
-                                    <label>Unsubscribe this user from all lists</label>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-danger btn-lg" data-loading-text="Loading..." autocomplete="off">UNSUBSCRIBE ALL</button>
-                                </div>
-                            </form>
+                            @include('partials.email-unsubscribe')
                         </div>
                     </div>
                 </div>
@@ -73,14 +58,12 @@
                                     </label>
                                     {{ $status['name'] }}
                                     @if (isset($status['groupings']))
-                                        <ul>
+                                        <ul class="list-unstyled">
                                             @foreach ($status['groupings'] as $grouping)
                                                 <li>
-                                                    @if ($status['subscribed'])
-                                                        <label class="label label-success">Yes</label>
-                                                    @else
-                                                        <label class="label label-danger">No</label>
-                                                    @endif
+                                                    <label class="label label-{{ $status['subscribed'] ? 'success' : 'danger' }}">
+                                                        &nbsp;
+                                                    </label>
                                                     {{ $grouping['name'] }}
                                                 </li>
                                             @endforeach

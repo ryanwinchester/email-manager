@@ -19,16 +19,8 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="email-panel panel-body">
-                    <form id="email-form" action="{{ route('email') }}" method="POST">
-                        <div class="form-group">
-                            <label for="email">Get status of an email</label>
-                            {{ csrf_field() }}
-                            <input type="email" name="email" id="email" placeholder="Email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-default">Check</button>
-                        </div>
-                    </form>
+                    <p>You are logged in!</p>
+                    <p>To update an email, enter it in the search field above!</p>
                 </div>
             </div>
         </div>
