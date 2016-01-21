@@ -44,10 +44,17 @@ class HubspotSubscriptions implements SubscriptionManager
 
         return $this->lists()->map(function ($list) use ($subscribed, $statuses) {
             $status = $statuses->where('id', $list->id)->first();
+            if (!$subscribed) {
+                $subscribed = -1;
+            } elseif (!$status) {
+                $subscribed = 0;
+            } else {
+                $subscribed = $status->subscribed ? 1 : -1;
+            }
             return [
                 'id' => $list->id,
                 'name' => $list->name,
-                'subscribed' => $status && $subscribed ? $status->subscribed : false,
+                'subscribed' => $subscribed,
             ];
         });
     }

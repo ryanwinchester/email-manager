@@ -46,7 +46,7 @@ class MailchimpSubscriptions implements SubscriptionManager
                 $subscription = [
                     'id' => $status['data'][0]['list_id'],
                     'name' => $status['data'][0]['list_name'],
-                    'subscribed' => $subscribed,
+                    'subscribed' => $subscribed ? 1 : -1,
                 ];
 
                 if (isset($status['data'][0]['merges']['GROUPINGS'])) {
@@ -64,7 +64,7 @@ class MailchimpSubscriptions implements SubscriptionManager
             return [
                 'id' => $list['id'],
                 'name' => $list['name'],
-                'subscribed' => false,
+                'subscribed' => 0,
             ];
         });
     }

@@ -31,7 +31,7 @@
             @endif
             <div class="row">
                 <div class="col-md-4">
-                    <div class="panel panel-primary">
+                    <div class="panel panel-warning">
                         <a class="panel-heading" data-toggle="collapse" href="#collapse-email-change">
                             Change email <span class="caret"></span>
                         </a>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="panel panel-primary">
+                    <div class="panel panel-warning">
                         <a class="panel-heading" data-toggle="collapse" href="#collapse-name-change">
                             Change name <span class="caret"></span>
                         </a>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="panel panel-primary">
+                    <div class="panel panel-warning">
                         <a class="panel-heading" data-toggle="collapse" href="#collapse-unsubscribe">
                             Unsubscribe <span class="caret"></span>
                         </a>
@@ -67,33 +67,11 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Subscription status for <strong>{{ $email }}</strong></div>
+                <div class="panel-heading">Subscription status</div>
 
                 <div class="panel-body">
                     @foreach ($services as $service)
-                        <h2>{{ $service['name'] }} Lists</h2>
-                        <ul class="subscription-statuses list-unstyled">
-                            @foreach ($service['statuses'] as $status)
-                                <li>
-                                    <label class="label label-{{$status['subscribed'] ? 'success' : 'danger' }}">
-                                        &nbsp;
-                                    </label>
-                                    {{ $status['name'] }}
-                                    @if (isset($status['groupings']))
-                                        <ul class="list-unstyled">
-                                            @foreach ($status['groupings'] as $grouping)
-                                                <li>
-                                                    <label class="label label-{{ $status['subscribed'] ? 'success' : 'danger' }}">
-                                                        &nbsp;
-                                                    </label>
-                                                    {{ $grouping['name'] }}
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </li>
-                            @endforeach
-                        </ul>
+                        @include('partials.subscription-status')
                     @endforeach
                 </div>
             </div>
