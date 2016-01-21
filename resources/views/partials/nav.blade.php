@@ -1,6 +1,6 @@
 
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse navbar-default" style="border-radius:0;">
     <div class="container">
         <div class="navbar-header">
 

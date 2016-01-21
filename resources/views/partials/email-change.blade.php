@@ -6,7 +6,7 @@
         <input type="email" name="new_email" id="new_email" placeholder="New email" class="form-control" required>
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-warning" data-loading-text="Loading..." autocomplete="off">
+        <button type="submit" class="btn btn-default" data-loading-text="Loading..." autocomplete="off">
             <i class="fa fa-pencil"></i> Change email
         </button>
     </div>

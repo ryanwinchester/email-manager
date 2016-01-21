@@ -1,6 +1,5 @@
 
 
-
 <form id="change-name-form" action="{{ route('name.change', [$email]) }}" method="POST">
     {{ csrf_field() }}
     {{ method_field('PATCH') }}
@@ -11,7 +10,7 @@
         <input type="text" name="last_name" id="last_name" placeholder="Last name" class="form-control" required>
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-warning" data-loading-text="Loading..." autocomplete="off">
+        <button type="submit" class="btn btn-default" data-loading-text="Loading..." autocomplete="off">
             <i class="fa fa-pencil"></i> Change name
         </button>
     </div>
