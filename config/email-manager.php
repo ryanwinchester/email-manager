@@ -19,10 +19,10 @@ return [
             'key' => env('MAILCHIMP_API_KEY', 'abc123abc123abc123abc123abc123-us1'),
         ],
 
-        'hubspot' => [
-            'key' => env('HUBSPOT_API_KEY', 'demo'),
-            'portal_id' => env('HUBSPOT_PORTAL_ID', '62515'),
-        ],
+//        'hubspot' => [
+//            'key' => env('HUBSPOT_API_KEY', 'demo'),
+//            'portal_id' => env('HUBSPOT_PORTAL_ID', '62515'),
+//        ],
 
     ],
 
