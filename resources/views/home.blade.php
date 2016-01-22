@@ -25,6 +25,30 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Latest events</div>
+                <div class="panel-body">
+                    <ul class="list-unstyled">
+                    @foreach ($events as $event)
+                    <li>
+                        {{ $event->user->name }}
+                        {{ $event->action }}
+                        {{ $event->subject }}&rsquo;s
+                        {{ $event->field }}
+                        @if ($event->field != 'unsubscribed')
+                            to {{ $event->new }}
+                        @endif
+                        on {{ $event->created_at->format('M j, Y') }}
+                    </li>
+                    @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 

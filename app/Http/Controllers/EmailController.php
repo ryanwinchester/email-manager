@@ -2,6 +2,9 @@
 
 namespace EmailManager\Http\Controllers;
 
+use EmailManager\Events\EmailWasChanged;
+use EmailManager\Events\EmailWasUnsubscribed;
+use EmailManager\Events\NameWasChanged;
 use EmailManager\Subscriptions\ManagerFactory;
 use Illuminate\Http\Request;
 
@@ -47,8 +50,10 @@ class EmailController extends Controller
             $manager->changeEmail($email, $new_email);
         });
 
+        event(new EmailWasChanged($email, $new_email, \Auth::user()));
+
         return redirect()->route('email.status', ['email' => $new_email])
-            ->with('warning', '<strong>Email change submitted.</strong> It might take a few minutes to show correctly.');
+            ->with('info', '<strong>Email change submitted.</strong> It might take a few minutes to show correctly.');
     }
 
     public function changeName(Request $request, $email)
@@ -60,8 +65,10 @@ class EmailController extends Controller
             $manager->changeName($email, $first_name, $last_name);
         });
 
+        event(new NameWasChanged($email, $first_name, $last_name, \Auth::user()));
+
         return back()
-            ->with('warning', '<strong>Name change submitted.</strong> It might take a few minutes to show correctly.');
+            ->with('info', '<strong>Name change submitted.</strong> It might take a few minutes to show correctly.');
     }
 
     public function unsubscribe($email)
@@ -70,7 +77,9 @@ class EmailController extends Controller
             $manager->unsubscribe($email);
         });
 
+        event(new EmailWasUnsubscribed($email, \Auth::user()));
+
         return back()
-            ->with('warning', '<strong>Email unsubscribed</strong> from all. It might take a few minutes to show correctly.');
+            ->with('info', '<strong>Email unsubscribed</strong> from all. It might take a few minutes to show correctly.');
     }
 }

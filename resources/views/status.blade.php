@@ -31,10 +31,10 @@
 
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            @if (Session::has('warning'))
+            @if (Session::has('info'))
                 <div class="alert alert-info alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <p>{!! Session::get('warning') !!}</p>
+                    <p>{!! Session::get('info') !!}</p>
                 </div>
             @endif
             <div class="row">

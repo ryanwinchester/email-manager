@@ -13,6 +13,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $events = \EmailManager\Event::latest()
+            ->with('user')
+            ->take('10')
+            ->get();
+
+        return view('home', compact('events'));
     }
 }
