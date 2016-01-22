@@ -36,12 +36,12 @@
                     <li>
                         {{ $event->user->name }}
                         {{ $event->action }}
-                        {{ $event->subject }}&rsquo;s
+                        <b>{{ $event->subject }}</b>&rsquo;s
                         {{ $event->field }}
                         @if ($event->field != 'unsubscribed')
-                            to {{ $event->new }}
+                            to <b>{{ $event->new }}</b>
                         @endif
-                        on {{ $event->created_at->format('M j, Y') }}
+                        <i>{{ $event->created_at->diffForHumans() }}</i>
                     </li>
                     @endforeach
                     </ul>
