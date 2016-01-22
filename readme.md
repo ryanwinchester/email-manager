@@ -1,5 +1,7 @@
 # Email Manager
 
+[![Packagist Pre Release](https://img.shields.io/packagist/vpre/ryanwinchester/email-manager.svg)]()
+
 ## Manage subscriptions
 
 Where I work, I end up getting a lot of requests from our customer service department to either update somebody's email, name, or to unsubscribe them from our lists. When you have 20+ lists over multiple services, this sucks.
